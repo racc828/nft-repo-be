@@ -6,15 +6,23 @@ class Api::V1::UsersController < ApplicationController
     end
   
     def create
-      user = User.create(user_params)
-      render json: {
-        id: user.id,
-        username: user.username,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email,
-        jwt: JWT.encode({id: user.id}, "nft")
-      }
+        user = User.find_by(username: params[:user][:username])
+        if user.present?
+        render json: {
+            error: "User Exists Already"
+        }, status: 404
+        else
+        newUser = User.create(user_params)
+        render json: {
+            id: newUser.id,
+            username: newUser.username,
+            firstname: newUser.firstname,
+            lastname: newUser.lastname,
+            email: newUser.email,
+            fullname: newUser.fullname,
+            jwt: JWT.encode({id: newUser.id}, "nft")
+        }
+        end
     end
   
     def show

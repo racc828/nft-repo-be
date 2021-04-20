@@ -18,6 +18,8 @@ class Api::V1::SessionsController < ApplicationController
         render json: {
           id: user.id,
           username: user.username,
+          firstname: user.firstname, 
+          lastname: user.lastname,
           jwt: JWT.encode({id: user.id}, "nft")
         }
       else
