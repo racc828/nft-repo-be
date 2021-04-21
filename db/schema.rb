@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_20_211633) do
+ActiveRecord::Schema.define(version: 2021_04_21_210815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,13 +27,19 @@ ActiveRecord::Schema.define(version: 2021_04_20_211633) do
     t.string "insta_link"
   end
 
+  create_table "collaborations", force: :cascade do |t|
+    t.string "artist_id"
+    t.string "collection_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "collections", force: :cascade do |t|
     t.string "name"
     t.datetime "start"
     t.datetime "end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "artist_id"
   end
 
   create_table "droptypes", force: :cascade do |t|

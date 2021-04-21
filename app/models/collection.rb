@@ -1,4 +1,5 @@
 class Collection < ApplicationRecord
-    belongs_to :artist
-    has_many :droptypes
+    has_many :collaborations
+    has_many :artists, through: :collaborations
+    has_many :droptypes, dependent: :destroy
 end
